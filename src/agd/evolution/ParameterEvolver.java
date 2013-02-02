@@ -104,6 +104,10 @@ public class ParameterEvolver implements EA {
         return fitness[0];
     }
 
+    /**
+     *
+     * @return the Parameters with the highest fitness in the population
+     */
     public Parameters getBest () {
         return population[0];
     }
