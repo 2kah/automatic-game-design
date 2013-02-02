@@ -12,15 +12,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jdom.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="file://$MODULE_DIR$/woxJava_1_0" />
         </CLASSES>
         <JAVADOC />
@@ -28,6 +19,15 @@
           <root url="file://$MODULE_DIR$/woxJava_1_0/woxJavaBin/source" />
           <root url="file://$MODULE_DIR$/woxJava_1_0/woxJavaSource/source" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/woxJava_1_0/woxJavaBin/lib/jdom.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
