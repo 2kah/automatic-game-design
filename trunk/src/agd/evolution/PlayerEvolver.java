@@ -1,6 +1,9 @@
 package agd.evolution;
 
-import agd.gridgame.*;
+import agd.gridgame.Controller;
+import agd.gridgame.Parameters;
+import agd.gridgame.Play;
+import agd.gridgame.TestParameters1;
 import wox.serial.Easy;
 
 /**
@@ -40,25 +43,45 @@ public class PlayerEvolver implements EA {
         this (parameters, controller, 100, 20);
     }
 
-    public PlayerEvolver (Parameters parameters, Evolvable controller, int popsize, int evaluationRepetitions) {
+    /**
+     * Sets up a PlayerEvolver, which will evolve a player controller using the given controller as a starting point.
+     * The player will be evolved towards being able to play the game described by the given Parameters.
+     *
+     * @param parameters game parameters for the player to play
+     * @param controller controller which implements Evolvable, this controller will evolve to play the game described
+     *                   by the given Parameters
+     * @param popsize size of the population of controllers
+     * @param evaluatorTrials number of trials for the evaluator to perform when determining fitness
+     */
+    public PlayerEvolver (Parameters parameters, Evolvable controller, int popsize, int evaluatorTrials) {
         this.popsize = popsize;
         elite = popsize / 2;
         this.evaluationRepetitions = 10;
         fitness = new double[popsize];
         population = new Evolvable[popsize];
         //System.out.println("Parameters: " + parameters);
-        evaluator = new GridGameEvaluator (evaluationRepetitions);
+        evaluator = new GridGameEvaluator (evaluatorTrials);
         this.parameters = parameters;
         for (int i = 0; i < popsize; i++) {
             population[i] = controller.copy();
             population[i].mutate ();
+            evaluate(i);
         }
+        shuffle ();
+        sortPopulationByFitness ();
     }
 
+    /**
+     * Creates a new generation by evaluating the first half of the population (most fit if sorted) and then mutating
+     * them to create the second half
+     */
     public void oneMoreGeneration () {
+        //TODO: optimise by not evaluating those which have already been
         for (int i = 0; i < elite; i++) {
             evaluate (i);
         }
+        //this uses the most fit half of the previous generation, and mutates them to create the other half
+        //TODO: might be better to implement some kind of crossover, or at least mutate the whole previous generation and then select the most fit half
         for (int i = elite; i < population.length; i++) {
             population[i] = population[i - elite].copy ();
             population[i].mutate ();

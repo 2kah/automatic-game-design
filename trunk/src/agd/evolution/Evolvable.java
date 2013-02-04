@@ -12,4 +12,5 @@ public interface Evolvable {
 
     public void mutate ();
 
+    //crossover is in Recombinable.java
 }

@@ -50,7 +50,9 @@ public class SimpleParameterEvaluator implements ParameterEvaluator {
             pe.oneMoreGeneration();
             System.out.print(".");
         }
-        System.out.println();
+        //this fitness value is the fitness obtained by running the GridGameEvaluator on the Parameters using the
+        // evolved controller best suited to the game
+        System.out.println(" Fitness: " + pe.getBestFitness());
         return new double[]{pe.getBestFitness()}; 
     }
 }
