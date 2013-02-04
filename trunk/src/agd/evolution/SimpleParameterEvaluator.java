@@ -13,7 +13,15 @@ import agd.gridgame.LongRandomController;
 public class SimpleParameterEvaluator implements ParameterEvaluator {
 
     final double maximumRandomFitness = 0.3;
-    
+
+    /**
+     * Evaluates a set of Parameters by first using a Random and a LongRandom controller to play the game, if either
+     * controller does too well then the Parameters fail and a fitness of -1 is returned. Next, an evolved controller
+     * is used and the fitness determined by that controller is returned.
+     *
+     * @param parameters the game Parameters to be evaluated
+     * @return an array of doubles containing a single value which is the fitness of the Parameters
+     */
     public double[] evaluate(Parameters parameters) {
         // first check that the random controllers fail
         RandomController randomController = new RandomController ();
