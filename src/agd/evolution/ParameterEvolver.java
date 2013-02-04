@@ -47,6 +47,7 @@ public class ParameterEvolver implements EA {
      * Creates a new generation by mutating the least fit members of the previous one
      */
     public void oneMoreGeneration () {
+        //TODO: optimise this by only evaluating those which haven't been evaluated already
         for (int i = 0; i < elite; i++) {
             fitness[i] = evaluator.evaluate(population[i])[0];
         }
@@ -75,7 +76,7 @@ public class ParameterEvolver implements EA {
     }
 
     /**
-     * Shuffles the population by swapping every individual with a random other
+     * Shuffles the population by swapping every individual with a random other (and their fitness)
      */
     private void shuffle () {
         for (int i = 0; i < popsize; i++) {
