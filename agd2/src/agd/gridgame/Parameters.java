@@ -193,6 +193,23 @@ public class Parameters implements Constants, Evolvable, Recombinable {
                 }
             }
         }
+        // easy to read version
+        sb.append("\nEasy read:\n");
+        for (int first = collisionEffects.length-1; first >= 0; first--) {
+            for (int second = first-1; second >= 0 ; second--) {
+                //TODO: tidy up this if statement
+                if ((collisionEffects[first][second] != NONE || collisionEffects[second][first] != NONE ||
+                        collisionScoreEffects[first][second] != 0 || collisionScoreEffects[second][first] != 0) &&
+                        ((first < 3 && intParams[first] > 0) && (second < 3 && intParams[second] > 0)) ||
+                        (first == 3 && intParams[second] > 0)) {
+                    sb.append(" " + colorNames[first] + ", " + colorNames[second] + " -> ");
+                    int overallScore = collisionScoreEffects[first][second] + collisionScoreEffects[second][first];
+                    sb.append(collisionEffectNames[collisionEffects[first][second]] + ", " +
+                            collisionEffectNames[collisionEffects[second][first]] + ", " +
+                            overallScore + "\n");
+                }
+            }
+        }
         return sb.toString ();
     }
 
