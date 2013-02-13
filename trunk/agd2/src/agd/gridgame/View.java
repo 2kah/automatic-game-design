@@ -1,8 +1,9 @@
 package agd.gridgame;
 
+import agd.gridgame.GameState.Description;
+
 import javax.swing.*;
 import java.awt.*;
-import agd.gridgame.GameState.Description;
 
 /**
  * Created by IntelliJ IDEA.
@@ -71,7 +72,7 @@ public class View extends JPanel implements Constants {
     }
 
     public void updateTitle () {
-        frame.setTitle ("Score: " + description.getScore ());    
+        frame.setTitle ("Score: " + description.getScore () + " Time: " + description.getT());
     }
 
     private final int[][] inputArea =
