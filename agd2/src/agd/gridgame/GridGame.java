@@ -73,11 +73,11 @@ public class GridGame implements Constants {
 
 
     private boolean checkIfGameHasEnded (Description description) {
-        return (description.getT () > timeLimit) ||
-                (!description.alive () );
-       /*  return (description.getT () > parameters.getTimeLimit ()) ||
+//        return (description.getT () > timeLimit) ||
+//                (!description.alive () );
+         return (description.getT () > timeLimit) ||
                 (!description.alive () ||
-                description.getScore() >= parameters.getScoreToWin());    */
+                description.getScore() >= parameters.getScoreToWin());
     }
 
     private GameResults calculateResults () {
