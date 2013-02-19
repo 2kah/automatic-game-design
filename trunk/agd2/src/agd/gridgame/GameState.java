@@ -309,10 +309,16 @@ public class GameState implements Constants {
             if (Math.abs (xDiff) > Math.abs (yDiff)) {
                 if (xDiff > 0)
                     return direction.left;
+                //if they are equal, choose closest direction randomly
+                else if (xDiff == 0 && Math.random() > 0.5)
+                    return direction.left;
                 return direction.right;
             }
             else {
                 if (yDiff > 0)
+                    return direction.up;
+                //if they are equal, choose closest direction randomly
+                else if (yDiff == 0 && Math.random() > 0.5)
                     return direction.up;
                 return direction.down;
             }    
