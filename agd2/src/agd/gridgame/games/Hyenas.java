@@ -18,6 +18,7 @@ public class Hyenas extends Parameters {
         collisionEffects[RED][RED] = DEATH;
         collisionScoreEffects[RED][RED] = 1;
         collisionEffects[AGENT][RED] = DEATH;
+        intParams[SCORELIMIT] = 6;
     }
 
 }

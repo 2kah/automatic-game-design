@@ -12,6 +12,7 @@ public class TrafficLightBuffet extends Parameters {
 
     public TrafficLightBuffet() {
         super ();
+        intParams[Parameters.SCORELIMIT] = 10;
         intParams[Parameters.NUMBER_OF_GREEN_THINGS] = 10;
         intParams[Parameters.NUMBER_OF_RED_THINGS] = 10;
         intParams[Parameters.GREEN_MOVEMENT_LOGIC] = STILL;

@@ -12,6 +12,7 @@ public class Golfer extends Parameters {
 
     public Golfer () {
         super ();
+        intParams[Parameters.SCORELIMIT] = 9;
         intParams[Parameters.NUMBER_OF_GREEN_THINGS] = 18;
         intParams[Parameters.NUMBER_OF_RED_THINGS] = 9;
         intParams[Parameters.NUMBER_OF_BLUE_THINGS] = 9;

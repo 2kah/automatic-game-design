@@ -12,6 +12,7 @@ public class Terrorists extends Parameters {
 
     public Terrorists() {
         super ();
+        intParams[Parameters.SCORELIMIT] = 2;
         intParams[Parameters.NUMBER_OF_RED_THINGS] = 5;  // bombs
         intParams[Parameters.NUMBER_OF_GREEN_THINGS] = 3;  // terrorists
         intParams[Parameters.NUMBER_OF_BLUE_THINGS] = 20;  // civilians

@@ -12,6 +12,7 @@ public class HyenasPro extends Parameters {
 
     public HyenasPro () {
         super ();
+        intParams[SCORELIMIT] = 6;
         intParams[NUMBER_OF_RED_THINGS] = 6; // hyenas
         intParams[NUMBER_OF_BLUE_THINGS] = 2; // hyena hunters
         intParams[NUMBER_OF_GREEN_THINGS] = 4; // hyena traps

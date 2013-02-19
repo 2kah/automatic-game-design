@@ -19,7 +19,7 @@ public class Original extends Parameters {
         intParams[Parameters.RED_MOVEMENT_LOGIC] = STILL;
         intParams[Parameters.GREEN_MOVEMENT_LOGIC] = COUNTERCLOCKWISE;
         intParams[Parameters.BLUE_MOVEMENT_LOGIC] = CLOCKWISE;
-       // intParams[Parameters.SCORELIMIT] = 2;
+        intParams[Parameters.SCORELIMIT] = 2;
         collisionEffects[AGENT][RED] = DEATH;
         collisionEffects[AGENT][BLUE] = TELEPORT;
         collisionEffects[BLUE][RED] = TELEPORT;
