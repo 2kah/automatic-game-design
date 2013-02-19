@@ -21,15 +21,16 @@ public class Parameters implements Constants, Evolvable, Recombinable {
     public static final int RED_OBJECTIVE = 6;
     public static final int GREEN_OBJECTIVE = 7;
     public static final int BLUE_OBJECTIVE = 8;
-    public static final int AGENT_DEATH_SCORE_EFFECT = 9;
+    //public static final int AGENT_DEATH_SCORE_EFFECT = 9;
+    public static final int SCORELIMIT = 9;
     // min and max values for each int parameter
-    public final int[] minIntParams = {0, 0, 0, 0, 0, 0, 0, 0, 0, -10};
+    public final int[] minIntParams = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
     public final int[] maxIntParams = {20, 20, 20,
             NUMBER_OF_MOVEMENT_TYPES - 1, NUMBER_OF_MOVEMENT_TYPES - 1, NUMBER_OF_MOVEMENT_TYPES - 1,
             NUMBER_OF_COLORS - 1, NUMBER_OF_COLORS - 1, NUMBER_OF_COLORS - 1, 10};
 
     // the actual arrays that denote position in rule and parameter space
-    public int[] intParams = new int[9];
+    public int[] intParams = new int[10];
     // read like this: when two things or a thing and an agent collides,
     // the effect on the first of these is found as collisionEffects[first][second]
     // indexing is: 0-2 color of thing, 3 agent
@@ -37,7 +38,7 @@ public class Parameters implements Constants, Evolvable, Recombinable {
     public int[][] collisionScoreEffects = new int[4][4];
 
     public int getNumberOfThings(int color) {
-        return intParams[NUMBER_OF_RED_THINGS + color];
+        return intParams[color];
     }
 
     public int getMovementLogic (int color) {
@@ -54,6 +55,10 @@ public class Parameters implements Constants, Evolvable, Recombinable {
 
     public int scoreEffectForThing (int firstThingColor, int secondThingColor) {
         return collisionScoreEffects[firstThingColor][secondThingColor];
+    }
+
+    public int getScoreToWin () {
+        return intParams[SCORELIMIT];
     }
 
     public int getObjective (int color) {
@@ -175,7 +180,7 @@ public class Parameters implements Constants, Evolvable, Recombinable {
 
     public String toString () {
         StringBuffer sb = new StringBuffer("Rules:\n");
-        //sb.append (" score " + intParams[SCORELIMIT] + " must be reached within " + intParams[TIMELIMIT] + " time steps\n");
+        sb.append (" score " + intParams[SCORELIMIT] + " must be reached within 100 time steps\n");
         sb.append (" red: " + intParams[NUMBER_OF_RED_THINGS] +
                 ", " + movementName (RED_MOVEMENT_LOGIC, RED_OBJECTIVE) + "\n");
         sb.append (" green: " + intParams[NUMBER_OF_GREEN_THINGS] +
