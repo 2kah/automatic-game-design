@@ -18,6 +18,7 @@ public class Casino extends Parameters {
         intParams[Parameters.RED_MOVEMENT_LOGIC] = RANDOM_LONG;
         intParams[Parameters.GREEN_MOVEMENT_LOGIC] = RANDOM_SHORT;
         intParams[Parameters.BLUE_MOVEMENT_LOGIC] = CLOCKWISE;
+        intParams[Parameters.SCORELIMIT] = 10;
         
         collisionScoreEffects[RED][GREEN] = -1;
         collisionScoreEffects[RED][BLUE] = 1;
