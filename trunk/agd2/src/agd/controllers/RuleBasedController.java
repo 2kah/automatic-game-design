@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Oct 9, 2008
  * Time: 5:15:43 PM
  */

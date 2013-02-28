@@ -2,7 +2,7 @@ package agd.gridgame;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 11, 2008
  * Time: 5:42:18 PM
  */

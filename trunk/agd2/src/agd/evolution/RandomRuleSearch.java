@@ -5,7 +5,7 @@ import agd.Test;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Aug 15, 2008
  * Timjava agd.test.TestLearnability agd.gridgame.games.TrafficLightBuffete: 11:58:23 PM
  */

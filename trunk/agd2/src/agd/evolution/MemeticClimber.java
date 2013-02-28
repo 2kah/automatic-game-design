@@ -7,7 +7,7 @@ import agd.controllers.SelectiveRMLPController;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Nov 24, 2008
  * Time: 6:29:08 PM
  */

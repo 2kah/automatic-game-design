@@ -4,7 +4,7 @@ import agd.gridgame.Parameters;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 23, 2009
  * Time: 5:04:11 PM
  */

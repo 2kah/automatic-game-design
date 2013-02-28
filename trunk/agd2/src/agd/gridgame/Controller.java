@@ -5,7 +5,7 @@ import agd.gridgame.GameState.Description;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jun 1, 2008
  * Time: 12:20:37 AM
  */

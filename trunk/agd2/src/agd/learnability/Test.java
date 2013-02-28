@@ -3,11 +3,11 @@ package agd.learnability;
 import agd.gridgame.Parameters;
 import wox.serial.Easy;
 import agd.evolution.*;
-import agd.controllers.MLPControllerPlus;
+import agd.controllers.*;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 27, 2009
  * Time: 12:06:09 PM
  */
@@ -25,9 +25,9 @@ public class Test {
         System.out.println(parameters);
 
         LearnabilityEvaluator learnability = null;
-        learnability = new HighscoreLearnabilityEvaluator();
+        learnability = new IntegralLearnabilityEvaluator();
         //learnability = new HighscoreLearnabilityEvaluator();
-        Evolvable controller = new MLPControllerPlus();
+        Evolvable controller = new RMLPControllerPlus();
         ControllerLearner  learner = null;
         learner = new PlayerEvolver(parameters, controller);
         //learner = new RandomPlayerSearch(parameters, controller);

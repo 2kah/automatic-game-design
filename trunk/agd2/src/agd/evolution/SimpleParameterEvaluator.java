@@ -7,7 +7,7 @@ import agd.controllers.MLPControllerPlus;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 24, 2008
  * Time: 10:27:05 PM
  */

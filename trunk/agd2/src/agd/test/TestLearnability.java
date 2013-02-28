@@ -9,7 +9,7 @@ import wox.serial.Easy;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 24, 2009
  * Time: 4:39:14 PM
  */

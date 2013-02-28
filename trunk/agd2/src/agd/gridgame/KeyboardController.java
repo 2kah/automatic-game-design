@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 9, 2008
  * Time: 5:38:16 PM
  */
