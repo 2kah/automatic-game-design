@@ -2,7 +2,7 @@ package agd.controllers;
 
 /**
  * Created by IntelliJ IDEA.
- * User: juto
+ * User: Julian Togelius
  * Date: Nov 18, 2009
  * Time: 3:53:04 PM
  */

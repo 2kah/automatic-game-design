@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Nov 19, 2008
  * Time: 9:27:20 PM
  */

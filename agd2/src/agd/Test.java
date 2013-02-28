@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 8, 2008
  * Time: 5:14:22 PM
  */

@@ -2,7 +2,7 @@ package agd.evolution;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Oct 14, 2008
  * Time: 3:34:31 PM
  */

@@ -9,7 +9,7 @@ import agd.controllers.RMLPControllerPlus;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Feb 10, 2009
  * Time: 6:43:08 PM
  */

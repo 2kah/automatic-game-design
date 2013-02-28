@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 2, 2008
  * Time: 3:56:01 PM
  */

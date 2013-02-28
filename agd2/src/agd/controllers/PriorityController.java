@@ -5,7 +5,7 @@ import agd.evolution.Evolvable;
 
 /**
  * Created by IntelliJ IDEA.
- * User: juto
+ * User: Julian Togelius
  * Date: Nov 13, 2009
  * Time: 4:58:17 PM
  */

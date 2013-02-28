@@ -5,7 +5,7 @@ import agd.gridgame.Controller;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 27, 2009
  * Time: 12:13:08 PM
  */

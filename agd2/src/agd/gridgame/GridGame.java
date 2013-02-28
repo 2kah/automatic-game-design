@@ -4,7 +4,7 @@ import agd.gridgame.GameState.Description;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jun 1, 2008
  * Time: 12:18:17 AM
  */
@@ -342,5 +342,9 @@ public class GridGame implements Constants {
 
     public GridGame copy () {
         return new GridGame (state.copy (), parameters);
+    }
+
+    public int getScoreToWin () {
+        return parameters.getScoreToWin();
     }
 }

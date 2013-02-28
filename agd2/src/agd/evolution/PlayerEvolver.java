@@ -7,7 +7,7 @@ import wox.serial.Easy;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 15, 2008
  * Time: 5:30:21 PM
  */
@@ -49,11 +49,11 @@ public class PlayerEvolver implements ControllerLearner {
     }
 
     public void init(Parameters parameters, Controller initial, int populationSize) {
-        init (parameters, (Evolvable) initial, popsize, 20);
+        init (parameters, (Evolvable) initial, populationSize, 20);
     }
 
-    public void init (Parameters parameters, Evolvable controller, int popsize, int evaluationRepetitions) {
-        this.popsize = popsize;
+    public void init (Parameters parameters, Evolvable controller, int populationSize, int evaluationRepetitions) {
+        this.popsize = populationSize;
         elite = popsize / 2;
         this.evaluationRepetitions = evaluationRepetitions;
         fitness = new double[popsize][2];

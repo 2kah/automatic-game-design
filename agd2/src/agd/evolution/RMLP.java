@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
- * User: jtogel
+ * User: Julian Togelius
  * Date: 15-Aug-2006
  * Time: 19:40:09
  */

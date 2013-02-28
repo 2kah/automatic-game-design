@@ -5,7 +5,7 @@ import agd.evolution.Recombinable;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jun 1, 2008
  * Time: 12:18:57 AM
  */

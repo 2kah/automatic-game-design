@@ -7,7 +7,7 @@ import agd.evolution.MLP;
 
 /**
  * Created by IntelliJ IDEA.
- * User: julian
+ * User: Julian Togelius
  * Date: Jul 14, 2008
  * Time: 8:42:06 PM
  */
