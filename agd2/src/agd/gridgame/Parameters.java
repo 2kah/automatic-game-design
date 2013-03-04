@@ -181,27 +181,30 @@ public class Parameters implements Constants, Evolvable, Recombinable {
     public String toString () {
         StringBuffer sb = new StringBuffer("Rules:\n");
         sb.append (" score " + intParams[SCORELIMIT] + " must be reached within 100 time steps\n");
-        sb.append (" red: " + intParams[NUMBER_OF_RED_THINGS] +
+        if (intParams[NUMBER_OF_RED_THINGS] > 0)
+            sb.append (" red: " + intParams[NUMBER_OF_RED_THINGS] +
                 ", " + movementName (RED_MOVEMENT_LOGIC, RED_OBJECTIVE) + "\n");
-        sb.append (" green: " + intParams[NUMBER_OF_GREEN_THINGS] +
+        if (intParams[NUMBER_OF_GREEN_THINGS] > 0)
+            sb.append (" green: " + intParams[NUMBER_OF_GREEN_THINGS] +
                 ", " + movementName (GREEN_MOVEMENT_LOGIC, GREEN_OBJECTIVE) + "\n");
-        sb.append (" blue: " + intParams[NUMBER_OF_BLUE_THINGS] +
+        if (intParams[NUMBER_OF_BLUE_THINGS] > 0)
+            sb.append (" blue: " + intParams[NUMBER_OF_BLUE_THINGS] +
                 ", " + movementName (BLUE_MOVEMENT_LOGIC, BLUE_OBJECTIVE) + "\n");
-        for (int first = 0; first < collisionEffects.length; first++) {
-            for (int second = first; second < collisionEffects.length; second++) {
-                if (collisionEffects[first][second] != NONE || collisionEffects[second][first] != NONE ||
-                        collisionScoreEffects[first][second] != 0 || collisionScoreEffects[second][first] != 0) {
-                    sb.append(" collision: " + colorNames[first] + ", " + colorNames[second] + " -> ");
-                    sb.append(collisionEffectNames[collisionEffects[first][second]] + ", " +
-                        collisionEffectNames[collisionEffects[second][first]] + ", " +
-                        collisionScoreEffects[first][second] + ", " + collisionScoreEffects[second][first] + "\n");
-                }
-            }
-        }
+//        for (int first = 0; first < collisionEffects.length; first++) {
+//            for (int second = first; second < collisionEffects.length; second++) {
+//                if (collisionEffects[first][second] != NONE || collisionEffects[second][first] != NONE ||
+//                        collisionScoreEffects[first][second] != 0 || collisionScoreEffects[second][first] != 0) {
+//                    sb.append(" collision: " + colorNames[first] + ", " + colorNames[second] + " -> ");
+//                    sb.append(collisionEffectNames[collisionEffects[first][second]] + ", " +
+//                        collisionEffectNames[collisionEffects[second][first]] + ", " +
+//                        collisionScoreEffects[first][second] + ", " + collisionScoreEffects[second][first] + "\n");
+//                }
+//            }
+//        }
         // easy to read version
-        sb.append("\nEasy read:\n");
+//        sb.append("\nRules:\n");
         for (int first = collisionEffects.length-1; first >= 0; first--) {
-            for (int second = first-1; second >= 0 ; second--) {
+            for (int second = (first == 3 ? first-1 : first); second >= 0 ; second--) {
                 //TODO: tidy up this if statement
                 if ((collisionEffects[first][second] != NONE || collisionEffects[second][first] != NONE ||
                         collisionScoreEffects[first][second] != 0 || collisionScoreEffects[second][first] != 0) &&
