@@ -52,6 +52,13 @@ public class PlayerEvolver implements ControllerLearner {
         init (parameters, (Evolvable) initial, populationSize, 20);
     }
 
+    /**
+     * Resets the state of the PlayerEvolver using the given arguments
+     * @param parameters The game Parameters to be evolved against
+     * @param controller An instance of the base controller to be evolved
+     * @param populationSize
+     * @param evaluationRepetitions
+     */
     public void init (Parameters parameters, Evolvable controller, int populationSize, int evaluationRepetitions) {
         this.popsize = populationSize;
         elite = popsize / 2;
@@ -71,6 +78,7 @@ public class PlayerEvolver implements ControllerLearner {
     public void oneMoreGeneration () {
         bestFitnessDistribution = null;
         bestThisGeneration = Double.NEGATIVE_INFINITY;
+
         for (int i = 0; i < elite; i++) {
             evaluate (i);
         }

@@ -4,7 +4,6 @@ import agd.controllers.RMLPControllerPlus;
 import agd.evolution.ControllerLearner;
 import agd.evolution.Evolvable;
 import agd.evolution.PlayerEvolver;
-import agd.gridgame.Controller;
 import agd.gridgame.Parameters;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -71,9 +70,11 @@ public class IntegralLearnabilityEvaluator implements LearnabilityEvaluator {
     private void runLearningAlgorithm (ControllerLearner learner, Parameters parameters,
                                        double[] fitnesses, double[] standardDeviations) {
         System.out.println("Running learning algorithm...");
-        Controller initial = new RMLPControllerPlus();
-        learner.init(parameters, initial, populationSize);
-        learner.setEvaluationRepetitions(trialsPerSample);
+
+        // learner has already been initialised
+//        Controller initial = new RMLPControllerPlus();
+//        learner.init(parameters, initial, populationSize);
+//        learner.setEvaluationRepetitions(trialsPerSample);
 
         // run the learning algorithm
         for (int generation = 0; generation < generations; generation++) {

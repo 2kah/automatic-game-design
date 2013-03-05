@@ -24,15 +24,15 @@ public class Test {
         }
         System.out.println(parameters);
 
-        LearnabilityEvaluator learnability = null;
-        learnability = new IntegralLearnabilityEvaluator();
+        LearnabilityEvaluator learnabilityEval = null;
+        learnabilityEval = new IntegralLearnabilityEvaluator();
         //learnability = new HighscoreLearnabilityEvaluator();
         Evolvable controller = new RMLPControllerPlus();
-        ControllerLearner  learner = null;
-        learner = new PlayerEvolver(parameters, controller);
+        ControllerLearner  controllerEvolver = null;
+        controllerEvolver = new PlayerEvolver(parameters, controller);
         //learner = new RandomPlayerSearch(parameters, controller);
 
-        double[] results = learnability.evaluate(learner, parameters);
+        double[] results = learnabilityEval.evaluate(controllerEvolver, parameters);
         System.out.println("Learnability: " + results[0]);
 
     }
