@@ -27,6 +27,7 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < population.length; i++) {
             population[i] = initial[i % initial.length].copy ();
             fitness[i] = evaluator.evaluate(population[i])[0];
+            population[i].fitnessKnown = true;
         }
         shuffle ();
         sortPopulationByFitness ();
@@ -36,6 +37,7 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < population.length; i++) {
             population[i] = Parameters.createRandomParameters();
             fitness[i] = evaluator.evaluate(population[i])[0];
+            population[i].fitnessKnown = true;
         }
         shuffle ();
         sortPopulationByFitness ();
@@ -45,15 +47,19 @@ public class ParameterEvolver implements EA {
      * Creates a new generation by mutating the least fit members of the previous one
      */
     public void oneMoreGeneration () {
-        //TODO: optimise this by only evaluating those which haven't been evaluated already - are there any that haven't?
         for (int i = 0; i < elite; i++) {
-            // evaluates the parameters (using SimpleParameterEvaluator)
-            fitness[i] = evaluator.evaluate(population[i])[0];
+            if (!population[i].fitnessKnown)
+            {
+                // evaluates the parameters (using SimpleParameterEvaluator)
+                fitness[i] = evaluator.evaluate(population[i])[0];
+                population[i].fitnessKnown = true;
+            }
         }
         for (int i = elite; i < population.length; i++) {
             population[i] = population[i % elite].copy ();
             population[i].mutate ();
             fitness[i] = evaluator.evaluate(population[i])[0];
+            population[i].fitnessKnown = true;
         }
         shuffle ();
         sortPopulationByFitness ();
@@ -145,6 +151,7 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < steps; i++) {
             Parameters temp = Parameters.createRandomParameters();
             double tempFitness = evaluator.evaluate(temp)[0];
+            temp.fitnessKnown = true;
             if (tempFitness > bestFitness) {
                 bestFitness = tempFitness;
                 best = temp;

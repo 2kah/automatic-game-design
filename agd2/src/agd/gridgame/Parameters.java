@@ -10,6 +10,7 @@ import agd.evolution.Recombinable;
  * Time: 12:18:57 AM
  */
 public class Parameters implements Constants, Evolvable, Recombinable {
+    public boolean fitnessKnown = false;
 
     // constants denoting indexes into the integer parameter array
     public static final int NUMBER_OF_RED_THINGS = 0;
@@ -92,6 +93,7 @@ public class Parameters implements Constants, Evolvable, Recombinable {
                         this.collisionScoreEffects[i][j] : other.collisionScoreEffects[i][j];
             }
         }
+        offspring.fitnessKnown = false;
         return offspring;
     }
 
@@ -101,6 +103,7 @@ public class Parameters implements Constants, Evolvable, Recombinable {
         while (Math.random () < 0.8) {
             changeOneThing ();
         }
+        this.fitnessKnown = false;
     }
 
     public Evolvable newInstance() {
@@ -174,7 +177,6 @@ public class Parameters implements Constants, Evolvable, Recombinable {
                 parameters.changeScoreEffect (i, j);
             }
         }
-
         return parameters;
     }
 
