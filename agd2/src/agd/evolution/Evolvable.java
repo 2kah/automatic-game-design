@@ -7,6 +7,8 @@ package agd.evolution;
  * Time: 9:46:03 PM
  */
 public interface Evolvable {
+    public boolean getFitnessKnown();
+    public void setFitnessKnown(boolean known);
 
     public Evolvable copy ();
 

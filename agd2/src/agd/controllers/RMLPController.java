@@ -11,6 +11,7 @@ import agd.evolution.RMLP;
  * Time: 7:23:53 PM
  */
 public class RMLPController implements Evolvable, Controller, Constants {
+    private boolean fitnessKnown = false;
 
     private final RMLP rmlp;
     private final int[][] inputArea =
@@ -18,6 +19,16 @@ public class RMLPController implements Evolvable, Controller, Constants {
                     {0, -2}, {0, -1}, {0, 1}, {0, 2},
                     {1, -1}, {1, 0}, {1, 1}, {2, 0}};
     private final int numberOfInputs = inputArea.length * 4;
+
+    public boolean getFitnessKnown()
+    {
+        return this.fitnessKnown;
+    }
+
+    public void setFitnessKnown(boolean known)
+    {
+        this.fitnessKnown = known;
+    }
 
     public RMLPController () {
         rmlp = new RMLP (numberOfInputs + 1, 6, 4);
@@ -33,6 +44,7 @@ public class RMLPController implements Evolvable, Controller, Constants {
 
     public void mutate() {
         rmlp.mutate ();
+        this.fitnessKnown = false;
     }
 
     public Evolvable newInstance() {
@@ -67,6 +79,7 @@ public class RMLPController implements Evolvable, Controller, Constants {
 
     public void reset() {
         rmlp.reset ();
+        this.fitnessKnown = false;
     }
 
     public int indexOfHighest (double[] array) {

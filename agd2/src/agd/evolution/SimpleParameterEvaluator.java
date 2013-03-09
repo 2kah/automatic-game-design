@@ -16,7 +16,7 @@ public class SimpleParameterEvaluator implements ParameterEvaluator {
     final double maximumRandomFitness = 0.3;
     
     public double[] evaluate(Parameters parameters) {
-        parameters.fitnessKnown = true;
+        parameters.setFitnessKnown(true);
         // first check that the random controllers fail
         RandomController randomController = new RandomController ();
         LongRandomController longRandomController = new LongRandomController ();

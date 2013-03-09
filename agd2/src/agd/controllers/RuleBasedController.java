@@ -18,6 +18,7 @@ import java.util.List;
  * Time: 5:15:43 PM
  */
 public class RuleBasedController implements Recombinable, Controller, Constants {
+    private boolean fitnessKnown = false;
 
     final int maxDepth = 3; 
     final int numberOfRules = 10;
@@ -25,6 +26,15 @@ public class RuleBasedController implements Recombinable, Controller, Constants 
     private List<Rule> rules = new ArrayList<Rule>();
     private direction defaultAction;
 
+    public boolean getFitnessKnown()
+    {
+        return this.fitnessKnown;
+    }
+
+    public void setFitnessKnown(boolean known)
+    {
+        this.fitnessKnown = known;
+    }
 
     public RuleBasedController() {
         for (int i = 0; i < numberOfRules; i++) {
@@ -49,6 +59,7 @@ public class RuleBasedController implements Recombinable, Controller, Constants 
     }
 
     public void mutate() {
+        this.fitnessKnown = false;
         double p = 1;
         while (Math.random() < p) {
             Rule rule = rules.get((int) Math.random() * rules.size());
@@ -80,6 +91,7 @@ public class RuleBasedController implements Recombinable, Controller, Constants 
     }
 
     public void reset() {
+        this.fitnessKnown = false;
     }
 
     private Node getNewNode(int depth) {
@@ -114,6 +126,7 @@ public class RuleBasedController implements Recombinable, Controller, Constants 
         if (Math.random () < 0.5) {
             offspring.defaultAction = this.defaultAction; 
         }
+        offspring.setFitnessKnown(false);
         return offspring;
     }
 
