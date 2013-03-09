@@ -55,11 +55,9 @@ public class Test {
     private static void generateCurve(Parameters parameters, Evolvable controllerType, String controllerName)
     {
         int generations = 100;
-        double[] learningCurve = new double[generations];
-        for(int i = 0; i < learningCurve.length; i++)
-            learningCurve[i] = 0;
 
-        int curvesToAverage = 100;
+        int curvesToAverage = 10;
+        double[][] curves = new double[curvesToAverage][generations];
 
         for(int i = 0; i < curvesToAverage; i++)
         {
@@ -69,17 +67,50 @@ public class Test {
 
             learnability.evaluate(controllerEvolver, parameters);
             System.out.println("Evaluation " + i + " complete for " + controllerName);
-            double[] tempCurve = learnability.fitnesses;
-            for(int j = 0; j < learningCurve.length; j++)
+            curves[i] = learnability.fitnesses;
+        }
+
+        double[] averageCurve = new double[generations];
+        // initialise to 0
+        for(int i = 0; i < averageCurve.length; i++)
+            averageCurve[i] = 0;
+
+        // calculate the average learning curve
+        for(int i = 0; i < averageCurve.length; i++)
+        {
+            for(int j = 0; j < curvesToAverage; j++)
+                averageCurve[i] += curves[j][i];
+
+            averageCurve[i] /= curvesToAverage;
+        }
+
+        double[] maxDifferences = new double[curvesToAverage];
+        for(int i = 0; i < maxDifferences.length; i++)
+            maxDifferences[i] = 0;
+
+        // find the learning curve with the greatest step
+        for(int i = 0; i < curvesToAverage; i++)
+        {
+            for(int j = 0; j < generations-1; j++)
             {
-                learningCurve[j] += tempCurve[j];
+                double difference = curves[i][j] - curves[i][j+1];
+                if(difference > maxDifferences[i])
+                    maxDifferences[i] = difference;
+            }
+        }
+        int mostInterestingCurve = 0;
+        double maxDifference = 0;
+        for(int i = 0; i < maxDifferences.length; i++)
+        {
+            if(maxDifferences[i] > maxDifference)
+            {
+                maxDifference = maxDifferences[i];
+                mostInterestingCurve = i;
             }
         }
 
-        for(int i = 0; i < learningCurve.length; i++)
-            learningCurve[i] /= curvesToAverage;
-
-        writeToCsv(controllerName + ".csv", learningCurve);
+        writeToCsv(controllerName + ".csv", averageCurve);
+        writeToCsv(controllerName + "MostInteresting.csv", curves[mostInterestingCurve]);
     }
 
     private static void writeToCsv(String filename, double[] values)
