@@ -80,7 +80,8 @@ public class PlayerEvolver implements ControllerLearner {
         bestThisGeneration = Double.NEGATIVE_INFINITY;
 
         for (int i = 0; i < elite; i++) {
-            evaluate (i);
+            if(!population[i].getFitnessKnown())
+                evaluate (i);
         }
         for (int i = elite; i < population.length; i++) {
             population[i] = population[i - elite].copy ();
@@ -101,6 +102,7 @@ public class PlayerEvolver implements ControllerLearner {
 
     private void evaluate (int which) {
         fitness[which] = evaluator.evaluate(parameters, (Controller) population[which]);
+        population[which].setFitnessKnown(true);
         double[] fitnessDistribution = evaluator.getTrialFitnesses();
         if (bestFitnessDistribution == null || fitness[which][0] > bestThisGeneration) {
             bestFitnessDistribution = fitnessDistribution;

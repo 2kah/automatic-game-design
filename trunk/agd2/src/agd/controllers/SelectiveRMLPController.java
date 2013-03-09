@@ -15,11 +15,22 @@ import agd.evolution.Evolvable;
  * Time: 7:42:34 PM
  */
 public class SelectiveRMLPController implements HierarchicallyMutable, Controller, Constants {
+    private boolean fitnessKnown = false;
 
     private final RMLP rmlp;
     private final int numberOfInputs = 10;
     private final int numberOfHiddenNeurons = 20;
     private final Input[] inputs;
+
+    public boolean getFitnessKnown()
+    {
+        return this.fitnessKnown;
+    }
+
+    public void setFitnessKnown(boolean known)
+    {
+        this.fitnessKnown = known;
+    }
 
     public SelectiveRMLPController () {
         inputs = new Input[numberOfInputs];
@@ -35,6 +46,7 @@ public class SelectiveRMLPController implements HierarchicallyMutable, Controlle
     }
 
     public void mutate(int level) {
+        this.fitnessKnown = false;
         switch (level) {
             case 0:
                 rmlp.mutate();
@@ -67,6 +79,7 @@ public class SelectiveRMLPController implements HierarchicallyMutable, Controlle
 
     public void mutate() {
         mutate (0);
+        this.fitnessKnown = false;
     }
 
     public Evolvable newInstance() {
@@ -88,6 +101,7 @@ public class SelectiveRMLPController implements HierarchicallyMutable, Controlle
 
     public void reset() {
         rmlp.reset ();
+        this.fitnessKnown = false;
     }
 
     public int indexOfHighest (double[] array) { // could use a softmax here...?

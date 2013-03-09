@@ -10,6 +10,7 @@ import agd.evolution.Evolvable;
  * Time: 4:58:17 PM
  */
 public class PriorityController implements Evolvable, Controller, Constants {
+    private boolean fitnessKnown = false;
 
     private Action action = new Action ();
     private direction movement = GridGame.randomDirection();
@@ -34,6 +35,16 @@ public class PriorityController implements Evolvable, Controller, Constants {
     protected int[] conditionTargets = new int[NUMBER_OF_LAYERS];
     protected int[] movementLogics = new int[NUMBER_OF_LAYERS];
     protected int[] movementTargets = new int[NUMBER_OF_LAYERS];
+
+    public boolean getFitnessKnown()
+    {
+        return this.fitnessKnown;
+    }
+
+    public void setFitnessKnown(boolean known)
+    {
+        this.fitnessKnown = known;
+    }
 
     public PriorityController () {
         startingMovementLogic = (int) (Math.random () * NUMBER_OF_MOVEMENT_TYPES);
@@ -62,6 +73,7 @@ public class PriorityController implements Evolvable, Controller, Constants {
         while (Math.random () > 0.5) {
             mutateAtomically ();
         }
+        this.fitnessKnown = false;
     }
 
     private void mutateAtomically () {
@@ -100,6 +112,7 @@ public class PriorityController implements Evolvable, Controller, Constants {
             movementLogics[i] = STILL;
             movementTargets[i] = RED;
         }
+        this.fitnessKnown = false;
     }
 
     public Evolvable newInstance() {
@@ -208,6 +221,7 @@ public class PriorityController implements Evolvable, Controller, Constants {
 
     public void reset() {
         movement = GridGame.randomDirection();
+        this.fitnessKnown = false;
     }
 
     public String toString () {

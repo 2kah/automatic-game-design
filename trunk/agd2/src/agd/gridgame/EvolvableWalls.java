@@ -13,6 +13,7 @@ import java.util.List;
  * Time: 9:27:20 PM
  */
 public class EvolvableWalls implements Evolvable, Walls, Constants {
+    private boolean fitnessKnown = false;
 
     static final int width = 16;
     static final int height = 15;
@@ -25,6 +26,16 @@ public class EvolvableWalls implements Evolvable, Walls, Constants {
             new Stretch (width-1, height-1, direction.left, width),
             new Stretch (0, height-1, direction.up, width)};
     private final List<Stretch> stretches;
+
+    public boolean getFitnessKnown()
+    {
+        return this.fitnessKnown;
+    }
+
+    public void setFitnessKnown(boolean known)
+    {
+        this.fitnessKnown = known;
+    }
 
     public EvolvableWalls () {
         stretches = new ArrayList<Stretch>();
@@ -65,6 +76,7 @@ public class EvolvableWalls implements Evolvable, Walls, Constants {
         else {
             stretches.remove((int) (Math.random () * stretches.size ()));
         }
+        this.fitnessKnown = false;
         redraw ();
     }
 

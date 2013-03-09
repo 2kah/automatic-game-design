@@ -1,7 +1,6 @@
 package agd.gridgame;
 
 import agd.evolution.Evolvable;
-import agd.evolution.KnownFitness;
 import agd.evolution.Recombinable;
 
 /**
@@ -10,7 +9,9 @@ import agd.evolution.Recombinable;
  * Date: Jun 1, 2008
  * Time: 12:18:57 AM
  */
-public class Parameters extends KnownFitness implements Constants, Evolvable, Recombinable {
+public class Parameters implements Constants, Evolvable, Recombinable {
+    private boolean fitnessKnown = false;
+
     // constants denoting indexes into the integer parameter array
     public static final int NUMBER_OF_RED_THINGS = 0;
     public static final int NUMBER_OF_GREEN_THINGS = 1;
@@ -36,6 +37,16 @@ public class Parameters extends KnownFitness implements Constants, Evolvable, Re
     // indexing is: 0-2 color of thing, 3 agent
     public int[][] collisionEffects = new int[4][4];
     public int[][] collisionScoreEffects = new int[4][4];
+
+    public boolean getFitnessKnown()
+    {
+        return this.fitnessKnown;
+    }
+
+    public void setFitnessKnown(boolean known)
+    {
+        this.fitnessKnown = known;
+    }
 
     public int getNumberOfThings(int color) {
         return intParams[color];
@@ -92,7 +103,7 @@ public class Parameters extends KnownFitness implements Constants, Evolvable, Re
                         this.collisionScoreEffects[i][j] : other.collisionScoreEffects[i][j];
             }
         }
-        offspring.fitnessKnown = false;
+        offspring.setFitnessKnown(false);
         return offspring;
     }
 

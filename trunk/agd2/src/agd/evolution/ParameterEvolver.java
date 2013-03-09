@@ -46,7 +46,7 @@ public class ParameterEvolver implements EA {
      */
     public void oneMoreGeneration () {
         for (int i = 0; i < elite; i++) {
-            if (!population[i].fitnessKnown)
+            if (!population[i].getFitnessKnown())
             {
                 // evaluates the parameters (using SimpleParameterEvaluator)
                 fitness[i] = evaluator.evaluate(population[i])[0];

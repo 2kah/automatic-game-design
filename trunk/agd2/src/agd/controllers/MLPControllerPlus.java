@@ -14,6 +14,7 @@ import agd.evolution.MLP;
  * Time: 8:24:38 PM
  */
 public class MLPControllerPlus implements Evolvable, Controller, Constants {
+    private boolean fitnessKnown = false;
 
     private final MLP mlp;
     private final int[][] inputArea =
@@ -21,6 +22,16 @@ public class MLPControllerPlus implements Evolvable, Controller, Constants {
                     {0, -2}, {0, -1}, {0, 1}, {0, 2},
                     {1, -1}, {1, 0}, {1, 1}, {2, 0}};
     private final int numberOfInputs = inputArea.length * 4 + direction.values().length * 3;
+
+    public boolean getFitnessKnown()
+    {
+        return this.fitnessKnown;
+    }
+
+    public void setFitnessKnown(boolean known)
+    {
+        this.fitnessKnown = known;
+    }
 
     public MLPControllerPlus () {
         mlp = new MLP (numberOfInputs + 1, 10, 4);
@@ -36,6 +47,7 @@ public class MLPControllerPlus implements Evolvable, Controller, Constants {
 
     public void mutate() {
         mlp.mutate ();
+        this.fitnessKnown = false;
     }
 
     public Evolvable newInstance() {
@@ -76,6 +88,7 @@ public class MLPControllerPlus implements Evolvable, Controller, Constants {
 
     public void reset() {
         mlp.reset ();
+        this.fitnessKnown = false;
     }
 
     public int indexOfHighest (double[] array) {
