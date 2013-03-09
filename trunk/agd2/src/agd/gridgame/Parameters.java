@@ -1,6 +1,7 @@
 package agd.gridgame;
 
 import agd.evolution.Evolvable;
+import agd.evolution.KnownFitness;
 import agd.evolution.Recombinable;
 
 /**
@@ -9,9 +10,7 @@ import agd.evolution.Recombinable;
  * Date: Jun 1, 2008
  * Time: 12:18:57 AM
  */
-public class Parameters implements Constants, Evolvable, Recombinable {
-    public boolean fitnessKnown = false;
-
+public class Parameters extends KnownFitness implements Constants, Evolvable, Recombinable {
     // constants denoting indexes into the integer parameter array
     public static final int NUMBER_OF_RED_THINGS = 0;
     public static final int NUMBER_OF_GREEN_THINGS = 1;

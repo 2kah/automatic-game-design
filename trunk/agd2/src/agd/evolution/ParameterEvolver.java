@@ -27,7 +27,6 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < population.length; i++) {
             population[i] = initial[i % initial.length].copy ();
             fitness[i] = evaluator.evaluate(population[i])[0];
-            population[i].fitnessKnown = true;
         }
         shuffle ();
         sortPopulationByFitness ();
@@ -37,7 +36,6 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < population.length; i++) {
             population[i] = Parameters.createRandomParameters();
             fitness[i] = evaluator.evaluate(population[i])[0];
-            population[i].fitnessKnown = true;
         }
         shuffle ();
         sortPopulationByFitness ();
@@ -52,14 +50,12 @@ public class ParameterEvolver implements EA {
             {
                 // evaluates the parameters (using SimpleParameterEvaluator)
                 fitness[i] = evaluator.evaluate(population[i])[0];
-                population[i].fitnessKnown = true;
             }
         }
         for (int i = elite; i < population.length; i++) {
             population[i] = population[i % elite].copy ();
             population[i].mutate ();
             fitness[i] = evaluator.evaluate(population[i])[0];
-            population[i].fitnessKnown = true;
         }
         shuffle ();
         sortPopulationByFitness ();
@@ -151,7 +147,6 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < steps; i++) {
             Parameters temp = Parameters.createRandomParameters();
             double tempFitness = evaluator.evaluate(temp)[0];
-            temp.fitnessKnown = true;
             if (tempFitness > bestFitness) {
                 bestFitness = tempFitness;
                 best = temp;
