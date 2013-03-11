@@ -1,7 +1,7 @@
 package agd.evolution;
 
+import agd.PlayRandomGame;
 import agd.gridgame.*;
-import agd.Test;
 import wox.serial.Easy;
 
 /**
@@ -58,19 +58,19 @@ public class RuleHillClimber {
         GridGame game = new GridGame (bestParameters);
         View view = new View (game.getStateDescription());
         KeyboardController controller = new KeyboardController ();
-        Test.initializeVisual(view, controller);
+        PlayRandomGame.initializeVisual(view, controller);
         GameResults results = game.play(view, controller, 0);
         System.out.println("Game results: agent " + (results.survived ? "survived" :  "died") +
                 ", score: " + results.score ); //+ " out of " + game.getScoreToWin());
         game = new GridGame (bestParameters);
         view = new View (game.getStateDescription());
-        Test.initializeVisual(view, controller);
+        PlayRandomGame.initializeVisual(view, controller);
         results = game.play(view, controller, 0);
         System.out.println("Game results: agent " + (results.survived ? "survived" :  "died") +
                 ", score: " + results.score ); //+ " out of " + game.getScoreToWin());
         game = new GridGame (bestParameters);
         view = new View (game.getStateDescription());
-        Test.initializeVisual(view, controller);
+        PlayRandomGame.initializeVisual(view, controller);
         results = game.play(view, controller, 0);
         System.out.println("Game results: agent " + (results.survived ? "survived" :  "died") +
                 ", score: " + results.score ); //+ " out of " + game.getScoreToWin());

@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
  * Date: Jul 8, 2008
  * Time: 5:14:22 PM
  */
-public class Test implements Constants {
+public class PlayRandomGame implements Constants {
 
     public static void main(String[] args) {
         //Parameters parameters = new Original ();
