@@ -1,7 +1,7 @@
 package agd.evolution;
 
 import agd.gridgame.*;
-import agd.Test;
+import agd.PlayRandomGame;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,7 +32,7 @@ public class RandomRuleSearch {
         GridGame game = new GridGame (bestParameters);
         View view = new View (game.getStateDescription());
         KeyboardController controller = new KeyboardController ();
-        Test.initializeVisual(view, controller);
+        PlayRandomGame.initializeVisual(view, controller);
         GameResults results = game.play(view, controller, 0);
         System.out.println("Game results: agent " + (results.survived ? "survived" :  "died") +
                 ", score: " + results.score);
