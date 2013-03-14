@@ -3,6 +3,8 @@ package agd.evolution;
 import agd.gridgame.Parameters;
 import wox.serial.Easy;
 
+import java.io.File;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Julian Togelius
@@ -123,15 +125,34 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < initial.length; i++) {
             initial[i] = randomParameterSearch (20, new SimpleParameterEvaluator());
         }
+
+        File f = new File("Games");
+        try
+        {
+            if(!f.mkdir())
+                System.out.println("Games Directory not created");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
         System.out.println("Starting agd.evolution");
         ParameterEvolver pe = new ParameterEvolver (initial);
         int generation = 0;
+        int gameNumber = 0;
+        double lastFitness = 0.0;
         while (true) {
             pe.oneMoreGeneration();
-            System.out.println("Generation " + generation++ + ", best: " + pe.getBestFitness ());
-            System.out.println(pe.getBest ());
-            Easy.save  (pe.getBest (), "best" + (int) (Math.random () * 10) + ".xml");
-        }
+            double currentFitness = pe.getBestFitness();
+            System.out.println("Generation " + generation++ + ", best: " + currentFitness);
+            if(currentFitness != lastFitness)
+            {
+                System.out.println(pe.getBest ());
+                Easy.save  (pe.getBest (), "Games/game" + gameNumber + ".xml");
+                gameNumber++;
+            }
+            lastFitness = currentFitness;        }
     }
 
     /**
