@@ -13,6 +13,7 @@ public class KeyboardController extends KeyAdapter implements Controller, Consta
 
     private direction dir = direction.up;
     boolean newActionChosen = false;
+    public boolean startNewGame = false;
 
     public Action control(GameState.Description state) {
         while (!newActionChosen) {
@@ -50,7 +51,10 @@ public class KeyboardController extends KeyAdapter implements Controller, Consta
                 dir = direction.right;
                 break;
         }
-        newActionChosen = true;
+        if(key == KeyEvent.VK_ENTER)
+            this.startNewGame = true;
+        else
+            newActionChosen = true;
     }
 
     public void reset () {}
