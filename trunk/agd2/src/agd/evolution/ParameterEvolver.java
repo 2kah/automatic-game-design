@@ -143,6 +143,7 @@ public class ParameterEvolver implements EA {
         int gameNumber = 0;
         double lastFitness = 0.0;
         while (true) {
+            //TODO: filtration?
             pe.oneMoreGeneration();
             double currentFitness = pe.getBestFitness();
             System.out.println("Generation " + generation++ + ", best: " + currentFitness);

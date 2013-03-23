@@ -1,13 +1,17 @@
 package agd.learnability;
 
-import agd.controllers.*;
+import agd.Util;
+import agd.controllers.MLPController;
+import agd.controllers.MLPControllerPlus;
+import agd.controllers.RMLPController;
+import agd.controllers.RMLPControllerPlus;
 import agd.evolution.ControllerLearner;
 import agd.evolution.Evolvable;
 import agd.evolution.PlayerEvolver;
 import agd.gridgame.Parameters;
-import wox.serial.Easy;
+import agd.gridgame.games.*;
 
-import java.io.FileWriter;
+import java.io.File;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,15 +22,15 @@ import java.io.FileWriter;
 public class Test {
 
     public static void main(String[] args) throws Exception {
-        Parameters parameters = null;
-        try {
-            parameters = (Parameters) Class.forName (args[0]).newInstance ();
-        }
-        catch (ClassNotFoundException e) {
-            System.out.println (args[0] + " is not a class name; trying to load a wox definition with that name.");
-            parameters = (Parameters) Easy.load (args[0]);
-        }
-        System.out.println(parameters);
+//        Parameters parameters = null;
+//        try {
+//            parameters = (Parameters) Class.forName (args[0]).newInstance ();
+//        }
+//        catch (ClassNotFoundException e) {
+//            System.out.println (args[0] + " is not a class name; trying to load a wox definition with that name.");
+//            parameters = (Parameters) Easy.load (args[0]);
+//        }
+//        System.out.println(parameters);
 
         //LearnabilityEvaluator learnabilityEval = new IntegralLearnabilityEvaluator();
         //learnability = new HighscoreLearnabilityEvaluator();
@@ -42,21 +46,43 @@ public class Test {
 
         //IntegralLearnabilityEvaluator learnability = (IntegralLearnabilityEvaluator) learnabilityEval;
 
-        generateCurve(parameters, new MLPController(), "MLPController");
-        generateCurve(parameters, new MLPControllerPlus(), "MLPControllerPlus");
-        //generateCurve(parameters, new PriorityController(), "PriorityController");
-        //generateCurve(parameters, new PriorityControllerHP(), "PriorityControllerHP");
-        //generateCurve(parameters, new PriorityControllerTLB(), "PriorityControllerTLB");
-        generateCurve(parameters, new RMLPController(), "RMLPController");
-        generateCurve(parameters, new RMLPControllerPlus(), "RMLPControllerPlus");
+        generateForEachController(new Casino(), "Casino");
+        generateForEachController(new Golfer(), "Golfer");
+        generateForEachController(new Hyenas(), "Hyenas");
+        generateForEachController(new HyenasPro(), "HyenasPro");
+        generateForEachController(new Original(), "Original");
+        generateForEachController(new Terrorists(), "Terrorists");
+        generateForEachController(new TrafficLightBuffet(), "TrafficLightBuffet");
 
     }
 
-    private static void generateCurve(Parameters parameters, Evolvable controllerType, String controllerName)
+    private static void generateForEachController(Parameters parameters, String parametersName)
+    {
+        File f = new File(parametersName);
+        try{
+            if(f.mkdir()) {
+                System.out.println("Directory Created");
+            } else {
+                System.out.println("Directory is not created");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        generateCurve(parameters, new MLPController(), "MLPController", parametersName);
+        generateCurve(parameters, new MLPControllerPlus(), "MLPControllerPlus", parametersName);
+        //generateCurve(parameters, new PriorityController(), "PriorityController");
+        //generateCurve(parameters, new PriorityControllerHP(), "PriorityControllerHP");
+        //generateCurve(parameters, new PriorityControllerTLB(), "PriorityControllerTLB");
+        generateCurve(parameters, new RMLPController(), "RMLPController", parametersName);
+        generateCurve(parameters, new RMLPControllerPlus(), "RMLPControllerPlus", parametersName);
+    }
+
+    private static void generateCurve(Parameters parameters, Evolvable controllerType, String controllerName, String parametersName)
     {
         int generations = 100;
 
-        int curvesToAverage = 10;
+        int curvesToAverage = 50;
         double[][] curves = new double[curvesToAverage][generations];
 
         for(int i = 0; i < curvesToAverage; i++)
@@ -93,7 +119,7 @@ public class Test {
         {
             for(int j = 0; j < generations-1; j++)
             {
-                double difference = curves[i][j] - curves[i][j+1];
+                double difference = curves[i][j+1] - curves[i][j];
                 if(difference > maxDifferences[i])
                     maxDifferences[i] = difference;
             }
@@ -109,28 +135,29 @@ public class Test {
             }
         }
 
-        writeToCsv(controllerName + ".csv", averageCurve);
-        writeToCsv(controllerName + "MostInteresting.csv", curves[mostInterestingCurve]);
+        Util util = new Util();
+        util.writeToCsv(parametersName + "/" + controllerName + ".csv", averageCurve);
+        util.writeToCsv(parametersName + "/" + controllerName + "MostInteresting.csv", curves[mostInterestingCurve]);
     }
 
-    private static void writeToCsv(String filename, double[] values)
-    {
-        try
-        {
-            FileWriter writer = new FileWriter(filename);
-
-            for(int i = 0; i < values.length; i++)
-            {
-                writer.append(Double.toString(values[i]) + '\n');
-            }
-            writer.flush();
-            writer.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+//    private static void writeToCsv(String filename, double[] values)
+//    {
+//        try
+//        {
+//            FileWriter writer = new FileWriter(filename);
+//
+//            for(int i = 0; i < values.length; i++)
+//            {
+//                writer.append(Double.toString(values[i]) + '\n');
+//            }
+//            writer.flush();
+//            writer.close();
+//        }
+//        catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 }
