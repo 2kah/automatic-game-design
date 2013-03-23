@@ -1,6 +1,9 @@
 package agd.gridgame;
 
+import agd.Util;
 import agd.gridgame.GameState.Description;
+
+import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,8 +30,22 @@ public class GridGame implements Constants {
         resetGameState ();
     }
 
-    public GameResults play (View view, Controller controller, int delay) {
+    public GameResults play (View view, Controller controller, int delay, String outputFile)
+    {
+        return play(view, controller, delay, true, outputFile);
+    }
+
+    public GameResults play (View view, Controller controller, int delay)
+    {
+        return play(view, controller, delay, false, "");
+    }
+
+    public GameResults play (View view, Controller controller, int delay, boolean outputData, String outputFile) {
         //resetGameState ();
+        // save the score at each timestep
+        ArrayList<Integer> scores = new ArrayList<Integer>();
+        // score starts at zero
+        scores.add(0);
         boolean end = false;
         while (!end) {
             if (state != null)  {
@@ -46,6 +63,7 @@ public class GridGame implements Constants {
                 view.repaint(1);
             }
             advanceTime ();
+            scores.add(description.getScore());
             end = checkIfGameHasEnded (description);
             if (delay > 0) {
                 try {
@@ -55,6 +73,11 @@ public class GridGame implements Constants {
                     e.printStackTrace ();
                 }
             }
+        }
+        if(outputData)
+        {
+            Util util = new Util();
+            util.writeToCsv(outputFile, scores);
         }
         return calculateResults ();
     }
