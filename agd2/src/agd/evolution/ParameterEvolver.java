@@ -149,7 +149,7 @@ public class ParameterEvolver implements EA {
             if(currentFitness != lastFitness)
             {
                 System.out.println(pe.getBest ());
-                Easy.save  (pe.getBest (), "Games/game" + gameNumber + ".xml");
+                Easy.save  (pe.getBest (), "Games/game" + String.format("%03d", gameNumber) + ".xml");
                 gameNumber++;
             }
             lastFitness = currentFitness;        }
