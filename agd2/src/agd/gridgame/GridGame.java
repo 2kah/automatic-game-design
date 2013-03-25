@@ -40,7 +40,7 @@ public class GridGame implements Constants {
         return play(view, controller, delay, false, "");
     }
 
-    public GameResults play (View view, Controller controller, int delay, boolean outputData, String outputFile) {
+    private GameResults play (View view, Controller controller, int delay, boolean outputData, String outputFile) {
         //resetGameState ();
         // save the score at each timestep
         ArrayList<Integer> scores = new ArrayList<Integer>();

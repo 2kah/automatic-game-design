@@ -55,7 +55,17 @@ public class Play {
         play (parameters, controller);
     }
 
-    public static void play (Parameters parameters, Controller controller) {
+    public static void play (Parameters parameters, Controller controller, String outputFolder)
+    {
+        play(parameters, controller, true, outputFolder);
+    }
+
+    public static void play (Parameters parameters, Controller controller)
+    {
+        play(parameters, controller, false, "");
+    }
+
+    private static void play (Parameters parameters, Controller controller, boolean outputData, String outputFolder) {
         GridGame game = new GridGame (parameters);
         View view = new View (game.getStateDescription());
         initializeVisual(view, (controller instanceof KeyAdapter ? (KeyAdapter) controller : null));
@@ -64,9 +74,19 @@ public class Play {
         if (controller instanceof KeyAdapter)
             kc = (KeyboardController) controller;
 
+        int i = 0;
+
         while(true)
         {
-            GameResults results = game.play(view, controller, 500);
+            GameResults results;
+            if(outputData)
+            {
+                results = game.play(view, controller, 500, outputFolder + "/" + i + ".csv");
+                // append score to file
+            }
+            else
+                results = game.play(view, controller, 500);
+
             System.out.println("Game results: agent " + (results.survived ? "survived" :  "died") +
                     ", score: " + results.score + " out of " + game.getScoreToWin());
 
@@ -87,6 +107,7 @@ public class Play {
             game.resetGameState();
             view.setDescription(game.getStateDescription());
             view.repaint(1);
+            i++;
         }
     }
 
