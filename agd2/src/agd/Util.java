@@ -1,5 +1,7 @@
 package agd;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -41,7 +43,7 @@ public class Util {
     }
 
     /**
-     * writes the arraylist to a csv file with the given filename
+     * appends the arraylist to a csv file with the given filename
      *
      * @param filename
      * @param values
@@ -51,13 +53,12 @@ public class Util {
     {
         try
         {
-            FileWriter writer = new FileWriter(filename);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
 
             for(int i = 0; i < values.size(); i++)
             {
-                writer.append(values.get(i).toString() + '\n');
+                writer.write(values.get(i).toString() + '\n');
             }
-            writer.flush();
             writer.close();
         }
         catch(Exception e)
