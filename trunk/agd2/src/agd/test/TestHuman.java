@@ -45,8 +45,6 @@ public class TestHuman {
         String[] gamePath = args[0].split("\\.");
         String gameName = gamePath[gamePath.length-1] + "HumanData";
 
-        System.out.println("This game is called " + gamePath[gamePath.length-1]);
-
         // make the folder if it doesn't already exist
         File f = new File(gameName);
         try{
