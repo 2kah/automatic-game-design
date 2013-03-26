@@ -1,5 +1,6 @@
 package agd.gridgame;
 
+import agd.Util;
 import wox.serial.Easy;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Play {
@@ -81,8 +83,11 @@ public class Play {
             GameResults results;
             if(outputData)
             {
-                results = game.play(view, controller, 500, outputFolder + "/" + i + ".csv");
-                // append score to file
+                results = game.play(view, controller, 500, outputFolder + "/Game" + i + ".csv");
+                Util util = new Util();
+                ArrayList score = new ArrayList();
+                score.add(results.score);
+                util.writeToCsv(outputFolder + "/FinalScores.csv", score);
             }
             else
                 results = game.play(view, controller, 500);
@@ -103,6 +108,7 @@ public class Play {
                     e.printStackTrace ();
                 }
             }
+            System.out.println("New game starting...");
             kc.startNewGame = false;
             game.resetGameState();
             view.setDescription(game.getStateDescription());

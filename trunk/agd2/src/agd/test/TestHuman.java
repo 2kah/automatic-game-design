@@ -7,8 +7,6 @@ import agd.gridgame.Play;
 import wox.serial.Easy;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +29,7 @@ public class TestHuman {
             System.out.println (paramName + " is not a class name; trying to load a wox definition with that name.");
             parameters = (Parameters) Easy.load(paramName);
         }
-        System.out.println(parameters);
+        //System.out.println(parameters);
         Controller controller = new KeyboardController();
         if (args.length > 1) {
             try {
@@ -44,6 +42,23 @@ public class TestHuman {
         }
         System.out.println(controller);
         // Play the game and output results
-        Play.play (parameters, controller, args[0]);
+        String[] gamePath = args[0].split("\\.");
+        String gameName = gamePath[gamePath.length-1] + "HumanData";
+
+        System.out.println("This game is called " + gamePath[gamePath.length-1]);
+
+        // make the folder if it doesn't already exist
+        File f = new File(gameName);
+        try{
+            if(f.mkdir()) {
+                //System.out.println("Directory Created");
+            } else {
+                //System.out.println("Directory is not created");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        Play.play (parameters, controller, gameName);
     }
 }
