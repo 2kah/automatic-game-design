@@ -40,7 +40,7 @@ public class TestHuman {
                 parameters = (Parameters) Easy.load (args[1]);
             }
         }
-        System.out.println(controller);
+        //System.out.println(controller);
         // Play the game and output results
         String[] gamePath = args[0].split("\\.");
         String gameName = gamePath[gamePath.length-1] + "HumanData";
