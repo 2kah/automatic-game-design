@@ -3,6 +3,7 @@ package agd.gridgame;
 import agd.Util;
 import agd.gridgame.GameState.Description;
 
+import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
 
 /**
@@ -46,6 +47,12 @@ public class GridGame implements Constants {
         ArrayList<Integer> scores = new ArrayList<Integer>();
         // score starts at zero
         scores.add(0);
+
+        // this is a hack to allow premature game ending when using keyboard controller
+        KeyboardController kc = null;
+        if (controller instanceof KeyAdapter)
+            kc = (KeyboardController) controller;
+
         boolean end = false;
         while (!end) {
             if (state != null)  {
@@ -54,6 +61,13 @@ public class GridGame implements Constants {
             GameState.Description description = state.getDescription ();
             //System.out.println("T: " + description.getT ());
             Action action = controller.control (description);
+
+            if(kc != null && kc.startNewGame == true)
+            {
+                kc.startNewGame = false;
+                break;
+            }
+
             takePlayerAction (action);
             checkAndHandleAgentCollisions (description);
             moveObjects (description);

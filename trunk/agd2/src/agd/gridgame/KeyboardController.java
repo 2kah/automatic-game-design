@@ -16,7 +16,7 @@ public class KeyboardController extends KeyAdapter implements Controller, Consta
     public boolean startNewGame = false;
 
     public Action control(GameState.Description state) {
-        while (!newActionChosen) {
+        while (!newActionChosen && !startNewGame) {
             try {
                 Thread.sleep (1);
             }
