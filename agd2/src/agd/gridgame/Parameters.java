@@ -38,6 +38,9 @@ public class Parameters implements Constants, Evolvable, Recombinable {
     public int[][] collisionEffects = new int[4][4];
     public int[][] collisionScoreEffects = new int[4][4];
 
+    // is the game winnable? (has it ever been won)
+    public boolean winnable = false;
+
     public boolean getFitnessKnown()
     {
         return this.fitnessKnown;

@@ -147,13 +147,20 @@ public class ParameterEvolver implements EA {
             pe.oneMoreGeneration();
             double currentFitness = pe.getBestFitness();
             System.out.println("Generation " + generation++ + ", best: " + currentFitness);
+            //only output the game if it has a different fitness and is winnable
             if(currentFitness != lastFitness)
             {
-                System.out.println(pe.getBest ());
-                Easy.save  (pe.getBest (), "Games/game" + String.format("%03d", gameNumber) + ".xml");
-                gameNumber++;
+                if(pe.getBest().winnable)
+                {
+                    System.out.println(pe.getBest ());
+                    Easy.save  (pe.getBest (), "Games/game" + String.format("%03d", gameNumber) + ".xml");
+                    gameNumber++;
+                }
+                else
+                    System.out.println("New game not output as it is not winnable");
+                lastFitness = currentFitness;
             }
-            lastFitness = currentFitness;        }
+        }
     }
 
     /**
