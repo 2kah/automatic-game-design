@@ -36,12 +36,17 @@ public class GridGameEvaluator {
         controller.reset();
         GridGame game = new GridGame(parameters);
         GameResults results = game.play(null, controller, 0);
+        //if the agent died then return -1
         if (!results.survived) {
             return -1;
         }
         double scoreToWin = (double) parameters.getScoreToWin();
+        //if the controller won then the game is winnable
+        if(results.score >= scoreToWin)
+            parameters.winnable = true;
         //prevent division by zero
         if (scoreToWin == 0) scoreToWin = 1;
+        //TODO: better measure of fitness? This is used to evaluate controllers
         return Math.max(-1, (results.score / scoreToWin));
     }
 

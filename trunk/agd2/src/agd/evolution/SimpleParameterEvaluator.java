@@ -34,17 +34,18 @@ public class SimpleParameterEvaluator implements ParameterEvaluator {
         }
         if (highestRandomFitness > maximumRandomFitness) {
             // these parameters are too easy; don't consider them further!
-            System.out.println("Failed random tests");
+            //System.out.println("Failed random tests");
             return new double[]{-1};
         }
-        System.out.print("Passed random tests");
+        //System.out.print("Passed random tests");
         // if not, return the highest score reached after 50 generations - the random cutoff
         PlayerEvolver pe = new PlayerEvolver (parameters, new MLPControllerPlus(), 10, 5);
         for (int generation = 0; generation < 50; generation++) {
             pe.oneMoreGeneration();
-            System.out.print(".");
+            //System.out.print(".");
         }
-        System.out.println();
+        //System.out.println();
+        //TODO: better measure of fitness than simply the fitness of the best controller
         return new double[]{pe.getBestFitness()}; 
     }
 }
