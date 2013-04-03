@@ -143,8 +143,11 @@ public class ParameterEvolver implements EA {
         int gameNumber = 0;
         double lastFitness = 0.0;
         while (true) {
-            //TODO: filtration?
+            //ensure genetic diversity by removing duplicates from the population, aka filtration
+            pe.removeDuplicates();
+
             pe.oneMoreGeneration();
+
             double currentFitness = pe.getBestFitness();
             System.out.println("Generation " + generation++ + ", best: " + currentFitness);
             //only output the game if it has a different fitness and is winnable
@@ -160,6 +163,31 @@ public class ParameterEvolver implements EA {
                     System.out.println("New game not output as it is not winnable");
                 lastFitness = currentFitness;
             }
+        }
+    }
+
+    /**
+     * Compares every member of the population to every other, if any two are the same then one is replaced with a random individual
+     */
+    private void removeDuplicates() {
+        boolean duplicateRemoved = false;
+        for(int i = 0; i < population.length-1; i++)
+        {
+            for(int j = i+1; j < population.length; j++)
+            {
+                if(population[i].compareTo(population[j]) == 0)
+                {
+                    population[i] = randomParameterSearch(20, new SimpleParameterEvaluator());
+                    fitness[i] = evaluator.evaluate(population[i])[0];
+                    duplicateRemoved = true;
+                }
+            }
+        }
+
+        if(duplicateRemoved)
+        {
+            shuffle ();
+            sortPopulationByFitness ();
         }
     }
 

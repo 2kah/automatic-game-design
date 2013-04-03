@@ -9,9 +9,7 @@ import agd.evolution.Recombinable;
  * Date: Jun 1, 2008
  * Time: 12:18:57 AM
  */
-public class Parameters implements Constants, Evolvable, Recombinable {
-    private boolean fitnessKnown = false;
-
+public class Parameters implements Constants, Evolvable, Recombinable, Comparable {
     // constants denoting indexes into the integer parameter array
     public static final int NUMBER_OF_RED_THINGS = 0;
     public static final int NUMBER_OF_GREEN_THINGS = 1;
@@ -40,6 +38,8 @@ public class Parameters implements Constants, Evolvable, Recombinable {
 
     // is the game winnable? (has it ever been won)
     public boolean winnable = false;
+    private boolean fitnessKnown = false;
+
 
     public boolean getFitnessKnown()
     {
@@ -107,6 +107,7 @@ public class Parameters implements Constants, Evolvable, Recombinable {
             }
         }
         offspring.setFitnessKnown(false);
+        offspring.winnable = false;
         return offspring;
     }
 
@@ -117,6 +118,7 @@ public class Parameters implements Constants, Evolvable, Recombinable {
             changeOneThing ();
         }
         this.fitnessKnown = false;
+        this.winnable = false;
     }
 
     public Evolvable newInstance() {
@@ -247,4 +249,44 @@ public class Parameters implements Constants, Evolvable, Recombinable {
         return sb.toString ();
     }
 
+    /**
+     * Compares the other object to the Parameters, returns 0 if they are equal, -1 otherwise
+     * This is a bit of a hack as compareTo should allow ordering, but no meaningful ordering of Parameters is possible
+     *
+     * @param o The other object to compare to
+     * @return -1 if the objects are different, 0 otherwise
+     */
+    public int compareTo(Object o) {
+        if(this == o)
+            return 0;
+
+        if(!(o instanceof Parameters))
+            return -1;
+
+        Parameters other = (Parameters) o;
+
+        if(other.getFitnessKnown() != fitnessKnown)
+            return -1;
+        if(other.winnable != winnable)
+            return -1;
+
+        for(int i = 0; i < intParams.length; i++)
+        {
+            if(other.intParams[i] != intParams[i])
+                return -1;
+        }
+
+        for(int i = 0; i < collisionEffects.length; i++)
+        {
+            for(int j = 0; j < collisionEffects[i].length; j++)
+            {
+                if(other.collisionEffects[i][j] != collisionEffects[i][j])
+                    return -1;
+                if(other.collisionScoreEffects[i][j] != collisionScoreEffects[i][j])
+                    return -1;
+            }
+        }
+
+        return 0;
+    }
 }
