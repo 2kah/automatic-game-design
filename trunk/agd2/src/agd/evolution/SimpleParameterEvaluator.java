@@ -45,7 +45,6 @@ public class SimpleParameterEvaluator implements ParameterEvaluator {
             //System.out.print(".");
         }
         //System.out.println();
-        //TODO: better measure of fitness than simply the fitness of the best controller
         return new double[]{pe.getBestFitness()}; 
     }
 }
