@@ -50,7 +50,7 @@ public class ParameterEvolver implements EA {
         for (int i = 0; i < elite; i++) {
             if (!population[i].getFitnessKnown())
             {
-                // evaluates the parameters (using SimpleParameterEvaluator)
+                // evaluates the parameters (using LearningCurveParameterEvaluator)
                 fitness[i] = evaluator.evaluate(population[i])[0];
             }
         }
@@ -123,7 +123,7 @@ public class ParameterEvolver implements EA {
         Parameters[] initial = new Parameters[popsize];
         System.out.println("Generating sensible starting positions randomly");
         for (int i = 0; i < initial.length; i++) {
-            initial[i] = randomParameterSearch (20, new SimpleParameterEvaluator());
+            initial[i] = randomParameterSearch (20, new LearningCurveParameterEvaluator());
         }
 
         File f = new File("Games");
@@ -178,7 +178,7 @@ public class ParameterEvolver implements EA {
             {
                 if(population[i].compareTo(population[j]) == 0)
                 {
-                    population[i] = randomParameterSearch(20, new SimpleParameterEvaluator());
+                    population[i] = randomParameterSearch(20, new LearningCurveParameterEvaluator());
                     fitness[i] = evaluator.evaluate(population[i])[0];
                     duplicateRemoved = true;
                 }
@@ -196,7 +196,7 @@ public class ParameterEvolver implements EA {
      * Generates a number of random Parameters and returns the best
      *
      * @param steps number of times to generate random Parameters
-     * @param evaluator a ParameterEvaluator of some sort (eg. SimpleParameterEvaluator)
+     * @param evaluator a ParameterEvaluator of some sort (eg. LearningCurveParameterEvaluator)
      * @return the best Parameters found
      */
     public static Parameters randomParameterSearch (int steps, ParameterEvaluator evaluator) {
