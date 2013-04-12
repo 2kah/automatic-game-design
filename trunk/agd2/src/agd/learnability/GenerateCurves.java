@@ -19,7 +19,7 @@ import java.io.File;
  * Date: Jul 27, 2009
  * Time: 12:06:09 PM
  */
-public class Test {
+public class GenerateCurves {
 
     public static void main(String[] args) throws Exception {
 //        Parameters parameters = null;

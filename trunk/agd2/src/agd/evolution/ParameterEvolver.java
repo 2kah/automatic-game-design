@@ -18,7 +18,7 @@ public class ParameterEvolver implements EA {
     //static final int evaluationRepetitions = 20;
     final private Parameters[] population = new Parameters[popsize];
     final private double[] fitness = new double[popsize];
-    final private ParameterEvaluator evaluator = new SimpleParameterEvaluator ();
+    final private ParameterEvaluator evaluator = new LearningCurveParameterEvaluator ();
 
     /**
      * Initialises the population using the given Parameters array and evaluates population fitness
