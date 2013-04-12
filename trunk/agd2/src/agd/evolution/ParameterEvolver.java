@@ -141,7 +141,7 @@ public class ParameterEvolver implements EA {
         ParameterEvolver pe = new ParameterEvolver (initial);
         int generation = 0;
         int gameNumber = 0;
-        double lastFitness = 0.0;
+        Parameters lastParams = null;
         while (true) {
             //ensure genetic diversity by removing duplicates from the population, aka filtration
             pe.removeDuplicates();
@@ -149,19 +149,20 @@ public class ParameterEvolver implements EA {
             pe.oneMoreGeneration();
 
             double currentFitness = pe.getBestFitness();
+            Parameters currentParams = pe.getBest();
             System.out.println("Generation " + generation++ + ", best: " + currentFitness);
-            //only output the game if it has a different fitness and is winnable
-            if(currentFitness != lastFitness)
+            //only output the game is different and is winnable
+            if(currentParams.compareTo(lastParams) != 0)
             {
-                if(pe.getBest().winnable)
+                if(currentParams.winnable)
                 {
-                    System.out.println(pe.getBest ());
-                    Easy.save  (pe.getBest (), "Games/game" + String.format("%03d", gameNumber) + ".xml");
+                    System.out.println(currentParams);
+                    Easy.save  (currentParams, "Games/game" + String.format("%03d", gameNumber) + ".xml");
                     gameNumber++;
                 }
                 else
                     System.out.println("New game not output as it is not winnable");
-                lastFitness = currentFitness;
+                lastParams = currentParams;
             }
         }
     }

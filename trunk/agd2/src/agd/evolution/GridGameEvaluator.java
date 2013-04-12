@@ -46,8 +46,8 @@ public class GridGameEvaluator {
             parameters.winnable = true;
         //prevent division by zero
         if (scoreToWin == 0) scoreToWin = 1;
-        //TODO: better measure of fitness? This is used to evaluate controllers
-        return Math.max(-1, (results.score / scoreToWin));
+        //if result is less than -1 then return -1, if result is greater than 1 then return 1
+        return Math.max(-1, Math.min(1, (results.score / scoreToWin)));
     }
 
     /**
