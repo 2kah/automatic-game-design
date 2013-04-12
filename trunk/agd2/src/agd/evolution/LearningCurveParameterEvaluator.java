@@ -15,8 +15,19 @@ import agd.gridgame.RandomController;
 public class LearningCurveParameterEvaluator implements ParameterEvaluator
 {
     final double maximumRandomFitness = 0.3;
+    final int generations = 50;
 
-    int generations = 50;
+    double idealCurve[];
+
+    public LearningCurveParameterEvaluator()
+    {
+        idealCurve = new double[generations];
+
+        for(int i = 0; i < generations; i++)
+        {
+            idealCurve[i] = (i+1) / (double) generations;
+        }
+    }
 
     public double[] evaluate(Parameters parameters)
     {
@@ -51,8 +62,14 @@ public class LearningCurveParameterEvaluator implements ParameterEvaluator
             fitnesses[generation] = pe.getBestFitness();
         }
 
-        //TODO: return how similar the learning curve is to the ideal
+        //sum of squares
+        double squaresAccumulator = 0;
+        for(int i = 0; i < generations; i++)
+        {
+            squaresAccumulator += Math.pow(fitnesses[i] - idealCurve[i], 2);
+        }
 
-        return new double[]{pe.getBestFitness()};
+        //fitness is 1 / sum of squared difference
+        return new double[]{1 / squaresAccumulator};
     }
 }
