@@ -137,12 +137,13 @@ public class ParameterEvolver implements EA {
             e.printStackTrace();
         }
 
-        System.out.println("Starting agd.evolution");
+        System.out.println("Starting evolution");
         ParameterEvolver pe = new ParameterEvolver (initial);
         int generation = 0;
         int gameNumber = 0;
         Parameters lastParams = null;
-        while (true) {
+        //evolve for 100 generations
+        while (generation < 100) {
             //ensure genetic diversity by removing duplicates from the population, aka filtration
             pe.removeDuplicates();
 
@@ -151,7 +152,7 @@ public class ParameterEvolver implements EA {
             double currentFitness = pe.getBestFitness();
             Parameters currentParams = pe.getBest();
             System.out.println("Generation " + generation++ + ", best: " + currentFitness);
-            //only output the game is different and is winnable
+            //only output if the game is different and is winnable
             if(currentParams.compareTo(lastParams) != 0)
             {
                 if(currentParams.winnable)
