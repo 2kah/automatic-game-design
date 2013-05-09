@@ -1,6 +1,6 @@
 package agd.evolution;
 
-import agd.controllers.MLPControllerPlus;
+import agd.controllers.RMLPControllerPlus;
 import agd.gridgame.LongRandomController;
 import agd.gridgame.Parameters;
 import agd.gridgame.RandomController;
@@ -55,8 +55,8 @@ public class LearningCurveParameterEvaluator implements ParameterEvaluator
         //this will store the learning curve
         double[] fitnesses = new double[generations];
 
-        // if not, return the highest score reached after 50 generations - the random cutoff
-        PlayerEvolver pe = new PlayerEvolver (parameters, new MLPControllerPlus(), 10, 5);
+        // if not, calculate the difference between the learning curve of controller and ideal curve
+        PlayerEvolver pe = new PlayerEvolver (parameters, new RMLPControllerPlus(), 10, 5);
         for (int generation = 0; generation < generations; generation++) {
             pe.oneMoreGeneration();
             fitnesses[generation] = pe.getBestFitness();
