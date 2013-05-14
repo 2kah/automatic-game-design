@@ -55,7 +55,7 @@ public class LearningCurveParameterEvaluator implements ParameterEvaluator
         //this will store the learning curve
         double[] fitnesses = new double[generations];
 
-        // if not, calculate the difference between the learning curve of controller and ideal curve
+        // calculate the difference between the learning curve of controller and ideal curve
         PlayerEvolver pe = new PlayerEvolver (parameters, new RMLPControllerPlus(), 10, 5);
         for (int generation = 0; generation < generations; generation++) {
             pe.oneMoreGeneration();
